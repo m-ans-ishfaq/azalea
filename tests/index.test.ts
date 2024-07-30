@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { app } from "../src"
+import { app } from '../src';
 
 describe('GET /', () => {
     it('should return Hello Azalea!', async () => {
