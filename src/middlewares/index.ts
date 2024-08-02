@@ -1,7 +1,13 @@
-import { Application } from 'express';
+import { Application, json } from 'express';
 import helmet from 'helmet';
+import { morganMiddleware } from './morgan';
 
 export const configMiddleware = (app: Application): void => {
+    
+    app.use(json());
+
+    app.use(morganMiddleware);
+
     app.use(
         helmet({
             contentSecurityPolicy: {
@@ -15,4 +21,5 @@ export const configMiddleware = (app: Application): void => {
             referrerPolicy: { policy: 'no-referrer' },
         }),
     );
+    
 };

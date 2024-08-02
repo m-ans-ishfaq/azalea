@@ -23,9 +23,7 @@ class User {
     public username!: string;
 
     @prop({
-        required: true,
-        minlength: 8,
-        maxlength: 40,
+        required: true
     })
     public password!: string;
 
