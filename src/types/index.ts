@@ -1,11 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
+import { ValidationChain } from 'express-validator';
+import { ErrorMessage, FieldMessageFactory } from 'express-validator/lib/base';
 
-/**
- * Type for a basic Express request handler
- */
-export type RequestHandler = (req: Request, res: Response) => void;
+export type RequestHandler<B = any, Q = any> = (req: Request<{}, {}, B, Q>, res: Response) => any;
 
-/**
- * Type for an Express middleware handler
- */
 export type MiddlewareHandler = (req: Request, res: Response, next: NextFunction) => void;
+
+export type Validator = (fields?: string | string[] | undefined, message?: FieldMessageFactory | ErrorMessage | undefined) => ValidationChain;
