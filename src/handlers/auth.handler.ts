@@ -14,21 +14,11 @@ export class AuthHandler {
             password: hashedPassword,
             avatarUrl,
         });
-        await newUser.save();
+        const savedUser = await newUser.save();
         return res.sendStatus(201);
     };
 
     static logIn: RequestHandler<z.infer<typeof AuthSchema.logInBody>> = async (req, res) => {
-        const { username, password } = req.body;
-        const user = await UserModel.findOne({ username }, { username, password });
-        if (!user) {
-            return res.sendStatus(404);
-        }
-        const { password: userPassword } = user;
-        const passwordMatches = await AuthService.comparePassword(password, userPassword);
-        if (!passwordMatches) {
-            return res.sendStatus(401);
-        }
         return res.sendStatus(200);
     };
 

@@ -6,8 +6,8 @@ import { config as envConfig } from 'dotenv';
 import { configRoutes } from './routes/index.routes';
 import { logger } from './utils/logger';
 import { errorHandler } from './utils/error-handler';
-
 envConfig();
+import "@/auth/passport";
 
 const app = express();
 const PORT = process.env.PORT || 3000;

@@ -3,6 +3,7 @@ import { AuthHandler } from '@/handlers/auth.handler';
 import { validate } from '@/middlewares/validation';
 import { requestHandler } from '@/utils/api-handler';
 import { AuthSchema } from '@/schemas/auth.schema';
+import passport from 'passport';
 
 const auth = Router();
 
@@ -14,7 +15,8 @@ auth.route('/register').post(
 );
 
 auth.route('/login').post(
-    validate('body', AuthSchema.logInBody), 
+    validate('body', AuthSchema.logInBody),
+    passport.authenticate('local'),
     requestHandler(logIn)
 );
 
