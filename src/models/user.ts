@@ -23,7 +23,7 @@ class User {
     public username!: string;
 
     @prop({
-        required: true
+        required: true,
     })
     public password!: string;
 

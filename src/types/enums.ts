@@ -1,3 +1,3 @@
 export enum MongoErrorCodes {
-    DuplicateKey = 11000
+    DuplicateKey = 11000,
 }

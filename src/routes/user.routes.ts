@@ -1,8 +1,12 @@
-import { Router } from "express";
-import { UsersHandler } from "@/handlers/user.handler";
+import { Router } from 'express';
+import { UsersHandler } from '@/handlers/user.handler';
+import { requestHandler } from '@/utils/api-handler';
 
 const users = Router();
 
-users.get("/", UsersHandler.getAll);
+const { getAll } = UsersHandler;
+
+users.get('/', requestHandler(getAll));
 
 export default users;
+    

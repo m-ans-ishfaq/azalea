@@ -1,22 +1,27 @@
-import { Router } from "express";
-import { AuthHandler } from "@/handlers/auth.handler";
-import { UserValidation } from "@/validations";
-import { check } from "express-validator";
-import { validate } from "@/middlewares/validation";
+import { Router } from 'express';
+import { AuthHandler } from '@/handlers/auth.handler';
+import { validate } from '@/middlewares/validation';
+import { requestHandler } from '@/utils/api-handler';
+import { AuthSchema } from '@/schemas/auth.schema';
 
 const auth = Router();
 
 const { register, logIn, logOut, forgotPassword, resetPassword } = AuthHandler;
-const { fullName, avatarUrl, password, username } = new UserValidation(check);
 
-auth.post("/register", [fullName, username, password, avatarUrl], validate, register);
+auth.route('/register').post(
+    validate('body', AuthSchema.registerBody), 
+    requestHandler(register)
+);
 
-auth.post("/login", logIn);
+auth.route('/login').post(
+    validate('body', AuthSchema.logInBody), 
+    requestHandler(logIn)
+);
 
-auth.post("/logout", logOut);
+auth.route('/logout').post(logOut);
 
-auth.post("/forgot-password", forgotPassword);
+auth.route('/forgot-password').post(forgotPassword);
 
-auth.post("/reset-password", resetPassword);
+auth.route('/reset-password').post(resetPassword);
 
 export default auth;
